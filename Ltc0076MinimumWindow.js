@@ -18,6 +18,7 @@ var minWindow = function(s, t) {
             l++;
         }
     }
+    
     function isValid(patMap, curMap){
         for (let key in patMap){
             if (curMap[key]<patMap[key]) return false;
