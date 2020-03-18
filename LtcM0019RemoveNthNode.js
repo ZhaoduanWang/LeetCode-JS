@@ -23,51 +23,40 @@ class LinkedList {
             if(cur!=null) 
                 process.stdout.write(`->`);
             else
-                process.stdout.write(`\n`);        }
+                process.stdout.write(`\n`);
+        }
     }
 }
 
-var mergeTwoLists = function(l1,l2) {
-    let resNode = new ListNode();
-    let curNode = resNode;
+var removeNthFromEnd = function(head, n) {
+    let dummyHead = new ListNode(0);
+    dummyHead.next = head;
+    let l = dummyHead;
+    let r = dummyHead;
 
-    while(l1&&l2){
-        if (l1.val<l2.val){
-            curNode.next = l1;
-            l1 = l1.next;
-        }else{
-            curNode.next = l2;
-            l2 = l2.next;
-        }
-        curNode = curNode.next;
+    for (let i=1; i<=n+1; i++){
+        r = r.next;
     }
-
-    while(l1){
-        curNode.next = l1;
-        l1 = l1.next;
+    while(r){
+        l = l.next;
+        r = r.next;
     }
-    while(l2){
-        curNode.next = l2;
-        l2 = l2.next;
-    }
-    return resNode.next;
+    l.next = l.next.next;
+    
+    return dummyHead.next;
 }
 
 linkedList1 = new LinkedList();
+linkedList1.unshift(5);
 linkedList1.unshift(4);
+linkedList1.unshift(3);
 linkedList1.unshift(2);
 linkedList1.unshift(1);
-linkedList2 = new LinkedList();
-linkedList2.unshift(4);
-linkedList2.unshift(3);
-linkedList2.unshift(1);
 
-//linkedList1.output();
-//linkedList2.output();
+linkedList1.output();
 
-let result = mergeTwoLists(linkedList1.head, linkedList2.head);
+let result = removeNthFromEnd(linkedList1.head, 2);
 while(result){
-    //console.log(`${result.val}->`);
     process.stdout.write(`${result.val}`);
     result = result.next;
     if(result!=null) 
