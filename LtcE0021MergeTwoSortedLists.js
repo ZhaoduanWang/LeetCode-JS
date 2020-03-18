@@ -64,8 +64,12 @@ linkedList2.unshift(1);
 
 let result = mergeTwoLists(linkedList1.head, linkedList2.head);
 while(result){
-    console.log(`${result.val}->`);
-    //serial.println(result.val + '->');
+    //console.log(`${result.val}->`);
+    process.stdout.write(`${result.val}`);
     result = result.next;
+    if(result!=null) 
+        process.stdout.write(`->`);
+    else
+        process.stdout.write(`\n`);
 }
 
