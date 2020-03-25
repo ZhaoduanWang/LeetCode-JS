@@ -28,3 +28,4 @@ var lengthOfLIS = function(nums){
 }
 
 console.log(lengthOfLIS([3,2,6,4,5,1]));
+console.log(lengthOfLIS([10,22,9,33,21,50,41,60]));
