@@ -8,14 +8,20 @@ var lengthOfLIS = function(nums){
 
     for (let i=1; i<nums.length; i++){
         for (let j=0; j<i; j++){
-            if ( (nums[j]<nums[i]) && (dp[i].length<dp[j].length+1) ){
-                process.stdout.write(`dp[${i}:${j}]:${dp[i]} `);
-                dp[i] = dp[j];
-                process.stdout.write(`dp[${i}:${j}]:${dp[i]}  `);
+            //process.stdout.write(`dp[${i}:${j}]  `);
+            if ( (nums[j]<nums[i]) && (dp[i].length<(dp[j].length+1)) ){
+                //process.stdout.write(`${dp[i]}`);
+                // Deep Copy
+                dp[i] = [];
+                for (k of dp[j])
+                    dp[i].push(k);
+                //process.stdout.write(`<=${dp[i]} `);
             }
         }
         dp[i].push(nums[i]);
-        process.stdout.write(`DP[${i}] : ${dp[i]}\n`);
+        //for (let k=0; k<nums.length; k++)
+        //    process.stdout.write(`DP[${k}]:${dp[k]} `);
+        //process.stdout.write(`\n`);
     }
 
     return dp;
