@@ -10,23 +10,36 @@ var longestCommonSubsequence = function(text1, text2){
     
     for (let i=1; i<text1.length; i++){
         for (let j=0; j<i; j++){
-            substr = dp[j] + text1[i];
+            if (dp[i].length<dp[j].length) {
+                dp[i] = [];
+                s = dp[j];
+                for ( k of dp[j])
+                    dp[i].push(k);
+                process.stdout.write(`1[${i}:${j}] ${dp[i]}\n`);
+            }
+            substr = [];
+            for (k of dp[j])
+                substr.push(k);
+            substr.push(text1[i]);
+            //substr = dp[j] + text1[i];
+            process.stdout.write(`2[${i}:${j}] ${substr}\n`);
             if ( lcsHelper(substr, text2) && (dp[i].length<substr.length) ){
                 dp[i] = [];
                 for ( k of substr)
                     dp[i].push(k);
+                process.stdout.write(`3[${i}:${j}] ${dp[i]}\n`);
             }
         }
     }
     
     function lcsHelper(substr, str){
-        l = 0;
-        for (i=0; i<substr.length; i++)
+        l = -1;
+        for (i=0; i<substr.length; i++) {
             for (j=0; j<str.length; j++)
-                if (substr[i]===str[j])
+                if ( (substr[i]===str[j]) && (j>l) ) { l = j; break; }
             if (j===str.length) return false;
-            else if (l>=j) return false;
-            else l = j;
+            else if (l>j) return false;
+        }
 
         return true;     
     }
