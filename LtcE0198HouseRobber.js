@@ -13,7 +13,8 @@ var rob = function(nums){
                 dp[i] = Math.max( dp[i], dp[j], nums[i]);
             }
     
-    console.log(dp);
+    //console.log(dp);
+    return dp[nums.length-1];
 }
 
 rob([1,2,3,1]);
